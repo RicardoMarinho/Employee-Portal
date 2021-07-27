@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Portal Colaborador - @ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="~/css/font.css">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="~/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="~/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/img/favicon.ico">
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/css/wickedpicker.min.css" rel="stylesheet" />
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="search-panel">
+                <div class="search-inner d-flex align-items-center justify-content-center">
+                    <div class="close-btn">Close <i class="fa fa-close"></i></div>
+                    <form id="searchForm" action="#">
+                        <div class="form-group">
+                            <input type="search" name="search" placeholder="What are you searching for...">
+                            <button type="submit" class="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <div class="navbar-header">
+                    <!-- Navbar Header-->
+                    <a href="~/Home/Index" class="navbar-brand">
+                        <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Portal</strong><strong>Colaborador</strong></div>
+                        <div class="brand-text brand-sm"><strong class="text-primary">P</strong><strong>C</strong></div>
+                    </a>
+                    <!-- Sidebar Toggle Btn-->
+                    <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+                </div>
+                <div class="right-menu list-inline no-margin-bottom">
+                    <!-- Log out               -->
+                    <div class="list-inline-item logout"><a id="logout" href="/Colaborador/Sair" class="nav-link"> <span class="d-none d-sm-inline">Logout </span><i class="icon-logout"></i></a></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <!-- Sidebar Navigation-->
+        <nav id="sidebar">
+            <!-- Sidebar Header-->
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="~/img/avatar-6.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h5">@ViewBag.Conta._nome</h1>
+                    <p>@ViewBag.NomePerfil._perfil</p>
+                    <p>@ViewBag.NomeDepartamento._departamento</p>
+                </div>
+            </div>
+            <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+            <ul class="list-unstyled">
+                <li class="@(ViewBag.Current == "Index" ? "active" : "")"><a href="~/Home/Index"> <i class="icon-home"></i>Home </a></li>
+                <li class="@(ViewBag.Current == "CriarRelatorio" || ViewBag.Current == "ListarRelatorio"  ? "active" : "")">
+                    <a href="#ReportDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-clock-o"></i>Registo de atividade </a>
+                    <ul id="ReportDropdown" class="collapse list-unstyled ">
+                        <li class="@(ViewBag.Current == "CriarRelatorio" ? "active" : "")"><a href="~/Relatorio/Criar">Registar relatório diário</a></li>
+                        <li class="@(ViewBag.Current == "ListarRelatorio" ? "active" : "")"><a href="~/Relatorio/Listar">Ver relatórios</a></li>
+                    </ul>
+                </li>
+
+                @if (ViewBag.NomePerfil._perfil == "Administrador")
+                {
+                    <li class="@(ViewBag.Current == "CriarColaborador" || ViewBag.Current == "ListarColaborador"  ? "active" : "")">
+                        <a href="#userDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-users"></i>Colaboradores </a>
+                        <ul id="userDropdown" class="collapse list-unstyled ">
+                            <li class="@(ViewBag.Current == "CriarColaborador" ? "active" : "")"><a href="~/Colaborador/Criar">Criar</a></li>
+                            <li class="@(ViewBag.Current == "ListarDepartamento" ? "active" : "")"><a href="~/Colaborador/Listar">Listar</a></li>
+                        </ul>
+                    </li>
+                    <li class="@(ViewBag.Current == "CriarDepartamento" || ViewBag.Current == "ListarDepartamento"  ? "active" : "")">
+                        <a href="#dptDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-briefcase"></i>Departamentos </a>
+                        <ul id="dptDropdown" class="collapse list-unstyled ">
+                            <li class="@(ViewBag.Current == "CriarDepartamento" ? "active" : "")"><a href="~/Departamento/Criar">Criar</a></li>
+                            <li class="@(ViewBag.Current == "ListarDepartamento" ? "active" : "")"><a href="~/Departamento/Listar">Listar</a></li>
+                        </ul>
+                    </li>
+                    <li class="@(ViewBag.Current == "CriarPerfil" || ViewBag.Current == "ListarPerfil"  ? "active" : "")">
+                        <a href="#perfilDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-id-card"></i>Perfil de colaborador </a>
+                        <ul id="perfilDropdown" class="collapse list-unstyled ">
+                            <li class="@(ViewBag.Current == "CriarPerfil" ? "active" : "")"><a href="~/Perfil/Criar">Criar</a></li>
+                            <li class="@(ViewBag.Current == "ListarPerfil" ? "active" : "")"><a href="~/Perfil/Listar">Listar</a></li>
+                        </ul>
+                    </li>
+                    <li class="@(ViewBag.Current == "CriarTipoRelatorio" || ViewBag.Current == "ListarTipoRelatorio"  ? "active" : "")">
+                        <a href="#TipoRelatorio" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file"></i>Tipo de relatório </a>
+                        <ul id="TipoRelatorio" class="collapse list-unstyled ">
+                            <li class="@(ViewBag.Current == "CriarTipoRelatorio" ? "active" : "")"><a href="~/TipoRelatorio/Criar">Criar</a></li>
+                            <li class="@(ViewBag.Current == "ListarTipoRelatorio" ? "active" : "")"><a href="~/TipoRelatorio/Listar">Listar</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <!-- Sidebar Navigation end-->
+        <div class="page-content">
+            <!-- Page Header-->
+            <div class="page-header no-margin-bottom">
+                <div class="container-fluid">
+                    <h2 class="h5 no-margin-bottom">@ViewData["Title"]</h2>
+                </div>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+            @RenderBody()
+
+        </div>
+        <footer class="footer">
+            <div class="footer__block no-margin-bottom">
+                <div class="container-fluid text-center">
+                    <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                    <p class="no-margin-bottom">2019 &copy; Your company. Design by <a href="https://bootstrapious.com/p/bootstrap-4-dark-admin" target="_blank">Bootstrapious</a>.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- JavaScript files-->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/popper.js/umd/popper.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/js/charts-home.js"></script>
+    <script src="~/js/front.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/wickedpicker.js"></script>
+    <script src="~/js/wickedpicker.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#successMessage').delay(3000).fadeOut();
+            $('#errorMessage').delay(3000).fadeOut();
+        });
+        $(function () {
+            //var times = new Date();
+            $('#datepicker').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1950:2001"
+            });
+            $('#datepickerRelatorio').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1950:2020"
+            }).datepicker("setDate", new Date());
+            $('#hInicial').wickedpicker({
+                twentyFour: true,
+                title: "",
+                now: "09:00"
+            });
+            $('#hFinal').wickedpicker({
+                twentyFour: true,
+                timeFormat: "HH:mm",
+                now: "18:00"
+            });
+            $('#hPInicial').wickedpicker({
+                twentyFour: true,
+                now: "13:00"
+            });
+            $('#hPFinal').wickedpicker({
+                twentyFour: true,
+                now: "14:00"
+
+            });
+        });
+    </script>
+</body>
+</html>

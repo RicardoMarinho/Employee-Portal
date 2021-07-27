@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Criar Perfil";
+    Layout = "~/Views/Shared/_Layout_Master.cshtml";
+}
+
+<section class="no-padding-top">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-6">
+                <div class="block">
+                    <div class="block-body">
+                        <form action="/Perfil/Criar" method="post" autocomplete="off">
+                            <div class="form-group">
+                                <label for="_perfil" class="control-label">Perfil: </label>
+                                <input name="_perfil" class="form-control" placeholder="Perfil" required />
+                                <span asp-validation-for="_perfil" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Criar" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Listar tipos de relatório";
+    Layout = "~/Views/Shared/_Layout_Master.cshtml";
+}
+<div class="col-lg-6">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success" id="successMessage">@TempData["Success"]</div>
+    }
+    <div class="block">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Designação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                        try
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td scope="row">@i</td>
+                                    <td>@item._designacao</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                        catch
+                        {
+                            <tr>
+                                <td>Não existem tipos de relatório criados.</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

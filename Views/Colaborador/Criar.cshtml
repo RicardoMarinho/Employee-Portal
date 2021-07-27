@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Criar novo colaborador";
+    Layout = "~/Views/Shared/_Layout_Master.cshtml";
+}
+
+<!-- Form Elements -->
+<div class="col-lg-12">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger" id="errorMessage">@TempData["Error"]</div>
+    }
+    <div class="block">
+        <div class="block-body">
+            <form action="/Colaborador/Criar" method="post" class="form-horizontal" autocomplete="off">
+                <div class="row">
+                    <label class="col-sm-3 form-control-label">Dados Pessoais</label>
+                    <div class="col-sm-9">
+                        <div class="form-group-material">
+                            <input id="register-username" type="text" name="_nome" required class="input-material">
+                            <label for="register-username" class="label-material">Nome completo</label>
+                        </div>
+                        <div class="form-group-material">
+                            <input id="register-email" type="email" name="_email" required class="input-material">
+                            <label for="register-email" class="label-material">Email</label>
+                        </div>
+                        <div class="form-group-material">
+                            <input id="datepicker" name="_dtNascimento" required class="input-material">
+                            <label for="register-date" class="label-material" style="top: -10px; font-size: 0.85rem;">Data de Nascimento</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Departamento</label>
+                    <div class="col-sm-9">
+                        <select name="_departamento" class="form-control mb-3 mb-3">
+                            <option value="" selected>Selecione um departamento</option>
+                            @{
+                                var dpt = ViewBag.Departamento;
+                                foreach (var value in dpt)
+                                {
+                                    <option value="@value._uidDepartamento">@value._departamento</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Perfil</label>
+                    <div class="col-sm-9">
+                        <select name="_perfil" class="form-control mb-3 mb-3">
+                            <option value="" selected>Selecione um perfil de colaborador</option>
+                            @{
+                                var perfis = ViewBag.Perfil;
+                                foreach (var value in perfis)
+                                {
+                                    <option value="@value._uidPerfil">@value._perfil</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <div class="col-sm-9 ml-auto">
+                        <a href="~/Home/Index"><div class="btn btn-secondary">Cancelar</div></a>
+                        <button type="submit" class="btn btn-primary">Guardar alterações</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

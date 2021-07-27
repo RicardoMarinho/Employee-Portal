@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Editar colaborador";
+    Layout = "~/Views/Shared/_Layout_Master.cshtml";
+}
+<div class="col-lg-12">
+    <div class="block">
+        <div class="block-body">
+            <form action="/Colaborador/Editar" method="post" class="form-horizontal" autocomplete="off">
+                <div class="row">
+                    <label class="col-sm-3 form-control-label">Dados Pessoais</label>
+                    <div class="col-sm-9">
+                        <div class="form-group-material">
+                            <input type="hidden" name="_uidColaborador" value="@Model._uidColaborador" />
+                            <input type="hidden" name="_dtNascimento" value="@Model._dtNascimento" />
+                            <input id="register-username" type="text" name="_nome" value="@Model._nome" required class="input-material">
+                            <label for="register-username" class="label-material">Nome completo</label>
+                        </div>
+                        <div class="form-group-material">
+                            <input id="register-email" type="email" name="_email" value="@Model._email" required class="input-material">
+                            <label for="register-email" class="label-material">Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Departamento</label>
+                    <div class="col-sm-9">
+                        <select name="_departamento" class="form-control mb-3 mb-3">
+                            @{
+                                var dpt = ViewBag.Departamento;
+                                foreach (var value in dpt)
+                                {
+                                    var isSelected = (value._uidDepartamento == Model._departamento) ? " selected " : "";
+                                    <option value="@value._uidDepartamento" @isSelected>@value._departamento</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Perfil</label>
+                    <div class="col-sm-9">
+                        <select name="_perfil" class="form-control mb-3 mb-3">
+                            @{
+                                var perfis = ViewBag.Perfil;
+                                foreach (var value in perfis)
+                                {
+                                    var isSelected = (value._uidPerfil == Model._perfil) ? " selected " : "";
+                                    <option value="@value._uidPerfil" @isSelected>@value._perfil</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Ativo</label>
+                    <div class="col-sm-9">
+                        <div class="i-checks">
+                            @{ 
+                                var isChecked = (Model._estado.ToString() == "ATIVO") ? " checked " : "";
+                            }
+                            <input id="checkboxCustom1" type="checkbox" name="_estado" value="@Model._estado" class="checkbox-template" @isChecked>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    <div class="col-sm-9 ml-auto">
+                        <a href="~/Colaborador/Listar"><div class="btn btn-secondary">Cancelar</div></a>
+                        <button type="submit" class="btn btn-primary">Guardar alterações</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "Lista de colaboradores";
+    Layout = "~/Views/Shared/_Layout_Master.cshtml";
+}
+    <div class="col-lg-12">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success" id="successMessage">@TempData["Success"]</div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">@TempData["Error"]</div>
+        }
+    <div class="block">
+        <div class="line"></div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <a href="~/Colaborador/ListarInativos"><div class="btn btn-info">Mostrar @ViewBag.Estado</div></a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Departamento</th>
+                        <th>Perfil</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                        try
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td scope="row">@i</td>
+                                    <td>@item._nome</td>
+                                    <td>@item._email</td>
+                                    @{
+                                        var dpt = ViewBag.Departamento;
+                                        foreach (var value in dpt)
+                                        {
+                                            if (item._departamento == value._uidDepartamento)
+                                            {
+                                                <td>@value._departamento</td>
+                                            }
+                                        }
+                                    }
+                                    @{
+                                        var perfil = ViewBag.Perfil;
+                                        foreach (var key in perfil)
+                                        {
+                                            if (item._perfil == key._uidPerfil)
+                                            {
+                                                <td>@key._perfil</td>
+                                            }
+                                        }
+                                    }
+                                    <td align="center"><a href="/Colaborador/Editar/@item._uidColaborador"><i class="fa fa-pencil"></i></a></td>
+                                    @{
+                                        var action = "";
+                                        var fa = "";
+                                        var title = "";
+                                        var btn = "";
+                                        if (item._estado.ToString() == "ATIVO")
+                                        {
+                                            action = "/Colaborador/Inativar";
+                                            fa = "fa fa-user-times";
+                                            title = "Inativar colaborador";
+                                            btn = "Inativos";
+                                        }
+                                        else
+                                        {
+                                            action = "/Colaborador/Ativar";
+                                            fa = "fa fa-user-plus";
+                                            title = "Ativar colaborador";
+                                            btn = "Ativos";
+                                        }
+                                    }
+                                    <td align="center"><a href="@action/@item._uidColaborador"><i class="@fa " title="@title"></i></a></td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                        catch
+                        {
+                            <tr>
+                                <td>Não existem colaboradores criados.</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>Portal Colaborador</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form method="post" action="/Colaborador/Login" class="form-validate mb-4" autocomplete="off" >
+                                @if (TempData["Login"] != null)
+                                {
+                                    <div class="form-group">
+                                        <div class="alert alert-danger" id="errorMessage">@TempData["Login"]</div>
+                                    </div>
+
+                                }
+                                <div class="form-group">
+                                    <input id="login-username" type="text" name="_email" required data-msg="Please enter your email" class="input-material">
+                                    <label for="login-username" class="label-material">Email</label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="login-password" type="password" name="_password" required data-msg="Please enter your password" class="input-material">
+                                    <label for="login-password" class="label-material">Password</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyrights text-center">
+        <p>Design by <a href="https://bootstrapious.com/p/bootstrap-4-dark-admin" class="external">Bootstrapious</a></p>
+        <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+    </div>
+</div>
+
+

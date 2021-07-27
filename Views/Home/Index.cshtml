@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Master.cshtml";
+}
+
+<div class="page-header">
+    <div class="container-fluid">
+        <h2 class="h5 no-margin-bottom">Dashboard</h2>
+    </div>
+</div>
+<section class="no-padding-top no-padding-bottom">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="statistic-block block">
+                    <div class="progress-details d-flex align-items-end justify-content-between">
+                        <div class="title">
+                            <div class="icon"><i class="icon-user-1"></i></div><strong>Colaboradores</strong>
+                        </div>
+                        <div class="number dashtext-1">@ViewBag.nCol</div>
+                        <input type="hidden" id="ncolaboradores" value="@ViewBag.ncol" />
+                    </div>
+                    <div class="progress progress-template">
+                        <div role="progressbar" style="width: @ViewBag.nCol%" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="statistic-block block">
+                    <div class="progress-details d-flex align-items-end justify-content-between">
+                        <div class="title">
+                            <div class="icon"><i class="icon-contract"></i></div><strong>Departamentos</strong>
+                        </div>
+                        <div class="number dashtext-2">@ViewBag.nDpt</div>
+                    </div>
+                    <div class="progress progress-template">
+                        <div role="progressbar" style="width: @ViewBag.nDpt%" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="statistic-block block">
+                    <div class="progress-details d-flex align-items-end justify-content-between">
+                        <div class="title">
+                            <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>Perfis</strong>
+                        </div>
+                        <div class="number dashtext-3">@ViewBag.nPerfil</div>
+                    </div>
+                    <div class="progress progress-template">
+                        <div role="progressbar" style="width: @ViewBag.nPerfil%" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
